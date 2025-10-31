@@ -1,0 +1,280 @@
+/* globals.css */
+@import "tailwindcss";
+
+/* ========= THEME TOKENS ========= */
+@theme {
+  /* Base font size */
+  --text-base: 16px;
+
+  /* Body text scale */
+  --text-body-overline: 0.625rem; /* 10px */
+  --text-body-xs: 0.75rem; /* 12px */
+  --text-body-sm: 0.875rem; /* 14px */
+  --text-body-md: 1rem; /* 16px */
+  --text-body-lg: 1.125rem; /* 18px */
+
+  /* Headings */
+  --text-h1: 2.875rem; /* 46px */
+  --text-h2: 1.5rem; /* 24px */
+  --text-h3: 1.25rem; /* 20px */
+  --text-h4: 1.125rem; /* 18px */
+  --text-h5: 1rem; /* 16px */
+
+  /* Colors */
+  --color-brand: #fa7275;
+  --color-brand-100: #ea6365;
+
+  --color-red: #ff7474;
+  --color-error: #b80000;
+  --color-green: #3dd9b3;
+  --color-blue: #56b8ff;
+  --color-pink: #eea8fd;
+  --color-orange: #f9ab72;
+
+  --color-light-100: #333f4e;
+  --color-light-200: #a3b2c7;
+  --color-light-300: #f2f5f9;
+  --color-light-400: #f2f4f8;
+
+  --color-dark-100: #04050c;
+  --color-dark-200: #131524;
+
+  /* Fonts */
+  --font-poppins: var(--font-poppins);
+
+  /* Shadows */
+  --shadow-drop-1: 0px 10px 30px rgba(66, 71, 97, 0.1);
+  --shadow-drop-2: 0 8px 30px rgba(65, 89, 214, 0.3);
+  --shadow-drop-3: 0 8px 30px rgba(65, 89, 214, 0.1);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Animations */
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+  --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+}
+
+/* ========= BASE STYLES ========= */
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-dark-200 min-h-screen font-poppins;
+  }
+
+  /* Dark mode */
+  .dark body {
+    @apply bg-dark-100 text-light-300;
+  }
+
+  /* Custom scrollbars */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 50px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand);
+  }
+
+  /* Remove scrollbar */
+  .remove-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .recharts-responsive-container {
+    height: initial !important;
+  }
+}
+
+/* ========= UTILITIES ========= */
+@layer utilities {
+  /* TYPOGRAPHY */
+  .h1 {
+    @apply text-h1 font-bold leading-14;
+  }
+  .h2 {
+    @apply text-h2 font-bold;
+  }
+  .h3 {
+    @apply text-h3 font-semibold;
+  }
+  .h4 {
+    @apply text-h4 font-medium;
+  }
+  .h5 {
+    @apply text-h5 font-semibold;
+  }
+
+  .subtitle-1 {
+    @apply text-body-md font-medium;
+  }
+  .subtitle-2 {
+    @apply text-body-sm font-semibold;
+  }
+  .body-1 {
+    @apply text-body-md font-normal leading-6;
+  }
+  .body-2 {
+    @apply text-body-sm font-normal;
+  }
+  .button {
+    @apply text-body-sm font-medium;
+  }
+  .caption {
+    @apply text-body-xs font-normal;
+  }
+  .overline {
+    @apply text-body-overline font-normal;
+  }
+
+  /* LAYOUT HELPERS */
+  .container {
+    @apply mx-auto max-w-7xl px-5;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* SIDEBAR, HEADER, DASHBOARD, ETC. */
+  /* (reuse your same utilities here — but now many buttons/forms will inherit from .btn classes) */
+}
+
+@layer components {
+  /* BUTTONS */
+  /* Base button */
+  .btn {
+    @apply inline-flex items-center justify-center 
+           px-4 py-2 rounded-md font-medium 
+           transition-colors duration-200 
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  /* Variants */
+  .btn-primary {
+    @apply bg-brand text-white 
+           hover:bg-brand-100 
+           focus:ring-brand;
+  }
+
+  .btn-secondary {
+    @apply bg-light-300 text-dark-200 
+           hover:bg-light-200 
+           focus:ring-light-200;
+  }
+
+  .btn-danger {
+    @apply bg-error text-white 
+           hover:bg-red-600 
+           focus:ring-error;
+  }
+
+  .btn-outline {
+    @apply border border-light-200 text-dark-200 
+           hover:bg-light-400 
+           focus:ring-dark-200;
+  }
+
+  .btn-ghost {
+    @apply text-dark-200 
+           hover:bg-light-400 
+           focus:ring-light-200;
+  }
+
+  /* Sizes */
+  .btn-sm {
+    @apply px-3 py-1 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-6 py-3 text-lg;
+  }
+
+  .btn-full {
+    @apply w-full;
+  }
+
+  /* SHADCN OVERRIDES */
+  .shad-no-focus {
+    @apply outline-none ring-offset-transparent focus:ring-transparent focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0;
+  }
+  .shad-input {
+    @apply border-none shadow-none p-0 placeholder:text-light-200;
+  }
+  .shad-form-item {
+    @apply flex h-[78px] flex-col justify-center rounded-xl border border-light-300 px-4 shadow-drop-1;
+  }
+  .shad-form-label {
+    @apply text-light-100 pt-2 w-full mb-2;
+  }
+  .shad-form-message {
+    @apply text-error  ml-4;
+  }
+
+  .shad-otp {
+    @apply w-full flex gap-1 sm:gap-2 justify-between mb-4;
+  }
+  .shad-otp-slot {
+    @apply text-[40px] font-medium rounded-xl ring-brand focus:outline-brand focus-within:outline-brand shadow-drop-1 text-brand-100 justify-center flex border-2 border-light-300 size-12 md:size-16 gap-5;
+  }
+
+  .shad-sheet {
+    @apply pt-0;
+  }
+  .shad-sheet button,
+  .shad-dialog button {
+    @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none outline-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0;
+  }
+  .shad-dropdown-item {
+    @apply cursor-pointer;
+  }
+  .shad-dialog {
+    @apply rounded-[26px] px-6 py-8 bg-white relative;
+  }
+  .shad-chart-title {
+    @apply text-white;
+  }
+  .shad-select-item {
+    @apply cursor-pointer;
+  }
+  .otp-close-button {
+    @apply absolute -right-[-16px] -top-[-16px] cursor-pointer sm:-right-[-16px] sm:-top-[-16px];
+  }
+
+  /* AuthForm */
+  .auth-form {
+    @apply flex max-h-[800px] w-full max-w-[580px] flex-col justify-center space-y-6  lg:h-full lg:space-y-8;
+  }
+
+  .form-title {
+    @apply text-center text-light-100 md:text-left;
+  }
+  .form-submit-button {
+    @apply h-[66px];
+  }
+  .error-message {
+    @apply mx-auto rounded-xl bg-error/5 px-8 py-4 text-center text-error;
+  }
+}
